@@ -1,8 +1,3 @@
-<%-- 
-    Document   : register
-    Created on : Jun 26, 2021, 4:33:26 PM
-    Author     : 861349
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,6 +12,7 @@
             <input type="text" name="username">
             <input type="hidden" name="action" value ="register">
             <input type="submit" value="Register">
+            <p>${displayText}</p>
         </form>
     </body>
 </html>
