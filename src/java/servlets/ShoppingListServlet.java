@@ -40,9 +40,7 @@ public class ShoppingListServlet extends HttpServlet {
         } else {
             getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
         }
-//        if (getAction == null) {
-//            getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
-//        }
+
 
     }
 
@@ -79,6 +77,11 @@ public class ShoppingListServlet extends HttpServlet {
                 String addItemMessage = "Please enter a valid item";
                 request.setAttribute("addItemText", addItemMessage);
             }
+        }
+        
+        if(getAction.equals("delete")){
+            String itemSelected = request.getParameter("item");
+            shoppingList.remove(itemSelected);
         }
 
     }
