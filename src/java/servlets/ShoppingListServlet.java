@@ -36,9 +36,9 @@ public class ShoppingListServlet extends HttpServlet {
         // if there is no resgistered username, redirect user to register page
         if (registerCheck == null) {
             getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+
         } else {
             getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
-
         }
 //        if (getAction == null) {
 //            getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
@@ -65,25 +65,22 @@ public class ShoppingListServlet extends HttpServlet {
 
         String getAction = request.getParameter("action");
         ArrayList<String> shoppingList = new ArrayList<String>();
+        if(session.getAttribute("itemList") != null){
+            shoppingList = (ArrayList<String>) session.getAttribute("itemList");
+        }
 
-//        if (getAction.equals("register")) {
-//            getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
-//            String userName = request.getParameter("username");
-//            session.setAttribute("username", userName);
-//        } else {
-//            getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
-//            
-//        }
         // adding shopping list items to AL to be printed
         if (getAction.equals("add")) {
             String item = request.getParameter("item");
             if (item != null) {
-                shoppingList.add(item);
+                shoppingList.add(item); 
+                session.setAttribute("itemList", shoppingList);
             } else {
                 String addItemMessage = "Please enter a valid item";
                 request.setAttribute("addItemText", addItemMessage);
             }
         }
+
     }
 
 }
