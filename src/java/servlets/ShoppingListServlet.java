@@ -41,7 +41,6 @@ public class ShoppingListServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
         }
 
-
     }
 
     @Override
@@ -53,17 +52,15 @@ public class ShoppingListServlet extends HttpServlet {
         String userName = request.getParameter("username");
 
         if (userName == null || userName.equals("")) {
-//            getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             response.sendRedirect("ShoppingList");
         } else {
-//            getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
             response.sendRedirect("ShoppingList");
             session.setAttribute("username", userName);
         }
 
         String getAction = request.getParameter("action");
         ArrayList<String> shoppingList = new ArrayList<String>();
-        if(session.getAttribute("itemList") != null){
+        if (session.getAttribute("itemList") != null) {
             shoppingList = (ArrayList<String>) session.getAttribute("itemList");
         }
 
@@ -71,15 +68,15 @@ public class ShoppingListServlet extends HttpServlet {
         if (getAction.equals("add")) {
             String item = request.getParameter("item");
             if (item != null) {
-                shoppingList.add(item); 
+                shoppingList.add(item);
                 session.setAttribute("itemList", shoppingList);
             } else {
                 String addItemMessage = "Please enter a valid item";
                 request.setAttribute("addItemText", addItemMessage);
             }
         }
-        
-        if(getAction.equals("delete")){
+        // deleting a shopping list item
+        if (getAction.equals("delete")) {
             String itemSelected = request.getParameter("item");
             shoppingList.remove(itemSelected);
         }
